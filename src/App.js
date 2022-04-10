@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from 'react'
+import { Route, Routes } from 'react-router-dom'
+import Navbar from './components/layout/Navbar'
+import Dashboard from './components/pages/Dashboard'
+import Home from './components/pages/Home'
+import Login from './components/pages/Login'
+import Register from './components/pages/Register'
+import PrivateRoute from './components/PrivateRoute'
 
-function App() {
+export const App = () => {
+ 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+    <Navbar/>
+    <Routes>
+        <>
+        <Route exact path="/login" element={<Login/>}/>
+        <Route exact path="/register" element={<Register/>}/>
+        <Route element={<PrivateRoute/>}>
+          <Route exact path='/home' element={<Home/>}/>
+          <Route exact path='/dashboard' element={<Dashboard/>}/>
+       </Route>
+        </>
+    </Routes>
+    </>
+  )
 }
-
-export default App;
+export default App
